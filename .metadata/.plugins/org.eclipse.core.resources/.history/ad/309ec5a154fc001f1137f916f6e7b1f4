@@ -1,0 +1,103 @@
+package com.banking.controller;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.banking.model.User;
+import com.banking.service.UserService;
+
+
+@Controller
+public class UserController {
+
+//
+//    @Autowired
+//    private BCryptPasswordEncoder passwordEncoder;
+
+    // Show registration form
+    @GetMapping("/register")
+    public String showRegistrationForm(Model model) {
+        model.addAttribute("user", new User());
+        return "register";
+    }
+
+//    // Handle user registration
+//    @PostMapping("/register")
+//    public String registerUser(@ModelAttribute("user") User user) {
+//        // Hash the password before saving
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//
+//        // Save the user
+//        userService.saveUser(user);
+//
+//        return "redirect:/user/login";
+//    }
+//
+//    // Show the login page
+//    @GetMapping("/login")
+//    public String showLoginForm() {
+//        return "login";
+//    }
+//
+//    // Show the user profile page
+//    @GetMapping("/profile/{id}")
+//    public String showUserProfile(@PathVariable Long id, Model model) {
+//        Optional<User> userOptional = userService.findUserById(id);
+//
+//        if (userOptional.isEmpty()) {
+//            throw new IllegalArgumentException("Invalid user ID");
+//        }
+//
+//        model.addAttribute("user", userOptional.get());
+//        return "user-profile";
+//    }
+//
+//    // Show update form
+//    @GetMapping("/update/{id}")
+//    public String showUpdateForm(@PathVariable Long id, Model model) {
+//        Optional<User> userOptional = userService.findUserById(id);
+//
+//        if (userOptional.isEmpty()) {
+//            throw new IllegalArgumentException("Invalid user ID");
+//        }
+//
+//        model.addAttribute("user", userOptional.get());
+//        return "update-user";
+//    }
+//
+//    // Handle user update
+//    @PostMapping("/update/{id}")
+//    public String updateUser(@PathVariable Long id, @ModelAttribute User user) {
+//        Optional<User> existingUserOptional = userService.findUserById(id);
+//
+//        if (existingUserOptional.isEmpty()) {
+//            throw new IllegalArgumentException("Invalid user ID");
+//        }
+//
+//        User existingUser = existingUserOptional.get();
+//
+//        // Keep the old password if the user does not update it
+//        if (user.getPassword() == null || user.getPassword().isEmpty()) {
+//            user.setPassword(existingUser.getPassword());
+//        } else {
+//            user.setPassword(passwordEncoder.encode(user.getPassword())); // Hash new password
+//        }
+//
+//        user.setId(id);
+//        userService.saveUser(user);
+//
+//        return "redirect:/user/profile/" + id;
+ //   }
+}
+
+

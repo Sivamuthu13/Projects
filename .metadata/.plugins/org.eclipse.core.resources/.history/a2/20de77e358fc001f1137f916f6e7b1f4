@@ -1,0 +1,52 @@
+package com.banking.service;
+
+import java.util.Optional;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.banking.model.User;
+import com.banking.repository.UserRepository;
+
+@Service
+public class UserService {
+	 
+	 
+    @Autowired
+    private UserRepository userRepository;
+    
+    @Autowired(required=true)
+    private PasswordEncoder passwordEncoder;
+    
+    // Save a user (e.g., during registration)
+    @Transactional
+    public User saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword())); // Hash password before saving
+        return userRepository.save(user);
+    }
+
+    // Find a user by ID
+    public Optional<User> findUserById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    // Find a user by username
+    public Optional<User> findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    // Validate user login (basic authentication)
+    public boolean authenticateUser(String username, String rawPassword) {
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            return passwordEncoder.matches(rawPassword, user.getPassword()); // Compare hashed passwords
+        }
+        return false;
+    }
+}
+

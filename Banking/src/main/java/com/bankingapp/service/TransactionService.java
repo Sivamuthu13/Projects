@@ -1,0 +1,59 @@
+package com.bankingapp.service;
+
+import com.bankingapp.model.Account;
+import com.bankingapp.model.Transaction;
+import com.bankingapp.repository.AccountRepository;
+import com.bankingapp.repository.TransactionRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class TransactionService {
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private TransactionRepository transactionRepository;
+
+    // Method to process a transaction (either deposit or withdrawal)
+    public String processTransaction(Long accountId, double amount, String transactionType, String description) {
+
+        // Validate amount
+        if (amount <= 0) {
+            return "Transaction amount must be positive.";
+        }
+
+        // Find account
+        Account account = accountRepository.findById(accountId).orElseThrow(() -> new IllegalArgumentException("Account not found"));
+
+        // Validate transaction type
+        if (!"deposit".equalsIgnoreCase(transactionType) && !"withdraw".equalsIgnoreCase(transactionType)) {
+            return "Invalid transaction type. Use 'deposit' or 'withdraw'.";
+        }
+
+        // Handle withdrawal logic
+        if ("withdraw".equalsIgnoreCase(transactionType)) {
+            if (account.getBalance() < amount) {
+                return "Insufficient balance for withdrawal.";
+            }
+            account.setBalance(account.getBalance() - amount);
+        } else if ("deposit".equalsIgnoreCase(transactionType)) {
+            account.setBalance(account.getBalance() + amount);
+        }
+
+        // Create and save the transaction
+        Transaction transaction = new Transaction();
+        transaction.setAccount(account);
+        transaction.setAmount(amount);
+        transaction.setTransactionType(transactionType);
+        transaction.setDescription(description);
+
+        transactionRepository.save(transaction);
+        accountRepository.save(account);
+
+        return "Transaction processed successfully.";
+    }
+}
+

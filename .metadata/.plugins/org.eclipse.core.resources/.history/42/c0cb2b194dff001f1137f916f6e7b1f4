@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the Bank Application</h1>
+    <a href="/user/register">Register</a>
+    <a href="/user/login">Login</a>
+	<a href="/user/user-profile/{id}">User Profile</a>
+	<a href="/user/update-user">Update User</a>
+    <a href="/account/form">Create Account</a>
+    <a href="/transaction/form">Transaction</a>
+</body>
+</html>

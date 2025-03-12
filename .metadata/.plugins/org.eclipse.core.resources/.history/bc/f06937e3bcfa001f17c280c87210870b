@@ -1,0 +1,5 @@
+package com.project.repository;
+@Repository
+public interface TransactionRepository extends JpaRepository<Transaction, Long> {
+    List<Transaction> findByAccount(Account account);
+}
