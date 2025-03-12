@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    
+    
+}
+.container {
+    width: 70%;
+    margin: 20px auto;
+    background:linear-gradient(to right, lightblue 30%, rgb(255, 255, 255) 30%);
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    
+}
+h1, h2 {
+    color: #2c3e50;
+}
+.section {
+    margin-bottom: 20px;
+}
+.contact, .skills, .projects, .education, .certifications, .languages {
+    list-style: none;
+    padding: 0;
+}
+.contact li, .skills li, .projects li, .education li, .certifications li, .languages li {
+    margin-bottom: 10px;
+}
+.name {
+    font-size: 50px; /* Adjust as needed */
+    font-family:"Microsoft Sans Serif", sans-serif; /* Adjust font */
+    font-weight: bold;
+}
+
+.name span {
+    display: block;
+}
+.info {
+    display: flex;
+    width: 100%;
+   
+}
+
+.left {
+    width: 30%;
+    
+}
+
+.right {
+    width: 70%;
+    
+}
+html
+
+.bold {
+    font-weight: bold;
+}
+ul.skills{
+    list-style-type: disc;
+    padding-left: 20px;
+}
